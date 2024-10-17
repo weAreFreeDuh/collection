@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.4'
+    id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.app'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17) // Java 17 사용
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral() // Maven Central 저장소 사용
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web' // Spring Web Starter
+    compileOnly 'org.projectlombok:lombok' // Lombok (주석 처리만)
+    developmentOnly 'org.springframework.boot:spring-boot-devtools' // 개발 도구
+    runtimeOnly 'com.mysql:mysql-connector-j' // MySQL 드라이버
+    annotationProcessor 'org.projectlombok:lombok' // Lombok 어노테이션 프로세서
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // 테스트용 스타터
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher' // JUnit 런처
+
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform() // JUnit 플랫폼 사용
+}
